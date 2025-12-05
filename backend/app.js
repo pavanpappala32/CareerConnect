@@ -14,7 +14,7 @@ config({ path: "./config/config.env" });
 
 app.use(
   cors({
-    origin: [process.env.FRONTEND_URL],
+    origin: ["https://careerconnect-6gf9.onrender.com"],
     method: ["GET", "POST", "DELETE", "PUT"],
     credentials: true,
   })
