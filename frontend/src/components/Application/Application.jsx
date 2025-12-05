@@ -72,7 +72,7 @@ const Application = () => {
 
     try {
       const { data } = await axios.post(
-        "http://localhost:4000/api/v1/application/post",
+        "https://careerconnect-backend-0wr3.onrender.com/api/v1/application/post",
         formData,
         {
           withCredentials: true,
@@ -90,13 +90,18 @@ const Application = () => {
       toast.success(data.message);
       navigateTo("/job/getall");
     } catch (error) {
-      const errorMessage = error.response?.data?.message || 
+      const errorMessage =
+        error.response?.data?.message ||
         "Something went wrong. Please try again later.";
       toast.error(errorMessage);
-      
-      // Show specific message for Cloudinary errors
-      if (errorMessage.includes("Cloudinary") || errorMessage.includes("api_key")) {
-        toast.error("File upload service is currently unavailable. Please try again later.");
+
+      if (
+        errorMessage.includes("Cloudinary") ||
+        errorMessage.includes("api_key")
+      ) {
+        toast.error(
+          "File upload service is currently unavailable. Please try again later."
+        );
       }
     } finally {
       setLoading(false);
@@ -150,8 +155,14 @@ const Application = () => {
             <label
               style={{ textAlign: "start", display: "block", fontSize: "20px" }}
             >
-              Upload Resume 
-              <p style={{ color: "red", fontSize: "12px", margin: "5px 0 0 0" }}>
+              Upload Resume
+              <p
+                style={{
+                  color: "red",
+                  fontSize: "12px",
+                  margin: "5px 0 0 0",
+                }}
+              >
                 (Supported formats: PNG, JPEG, WEBP. Max size: 2MB)
               </p>
             </label>
@@ -162,17 +173,23 @@ const Application = () => {
               style={{ width: "100%" }}
             />
             {fileError && (
-              <p style={{ color: "red", fontSize: "14px", marginTop: "5px" }}>
+              <p
+                style={{
+                  color: "red",
+                  fontSize: "14px",
+                  marginTop: "5px",
+                }}
+              >
                 {fileError}
               </p>
             )}
           </div>
-          <button 
-            type="submit" 
+          <button
+            type="submit"
             disabled={loading}
-            style={{ 
+            style={{
               opacity: loading ? 0.7 : 1,
-              cursor: loading ? "not-allowed" : "pointer" 
+              cursor: loading ? "not-allowed" : "pointer",
             }}
           >
             {loading ? "Submitting..." : "Send Application"}
