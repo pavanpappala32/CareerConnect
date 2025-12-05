@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 import { Context } from "../../main";
+
 const JobDetails = () => {
   const { id } = useParams();
   const [job, setJob] = useState({});
@@ -12,7 +12,7 @@ const JobDetails = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:4000/api/v1/job/${id}`, {
+      .get(`https://careerconnect-backend-0wr3.onrender.com/api/v1/job/${id}`, {
         withCredentials: true,
       })
       .then((res) => {
@@ -21,7 +21,7 @@ const JobDetails = () => {
       .catch((error) => {
         navigateTo("/notfound");
       });
-  }, []);
+  }, [id, navigateTo]);
 
   if (!isAuthorized) {
     navigateTo("/login");
