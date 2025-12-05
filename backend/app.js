@@ -12,6 +12,9 @@ import fileUpload from "express-fileupload";
 const app = express();
 config({ path: "./config/config.env" });
 
+
+app.set("trust proxy", 1);
+
 app.use(
   cors({
     origin: ["https://careerconnect-6gf9.onrender.com"],
